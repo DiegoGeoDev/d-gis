@@ -1,8 +1,20 @@
 {
   "name": "d-gis",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "type": "module",
+  "description": "Modern React Map Components Library built with shadcn/ui architecture",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DiegoGeoDev/d-gis.git"
+  },
+  "homepage": "https://github.com/DiegoGeoDev/d-gis",
+  "bugs": {
+    "url": "https://github.com/DiegoGeoDev/d-gis/issues"
+  },
+  "author": "Diego dos Santos Rodrigues <diego.geodev@gmail.com>",
+  "license": "MIT",
+  "keywords": ["react", "map", "components", "shadcn", "ui", "gis", "maplibre", "typescript"],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
