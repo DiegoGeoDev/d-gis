@@ -14,7 +14,16 @@
   },
   "author": "Diego dos Santos Rodrigues <diego.geodev@gmail.com>",
   "license": "MIT",
-  "keywords": ["react", "map", "components", "shadcn", "ui", "gis", "maplibre", "typescript"],
+  "keywords": [
+    "react",
+    "map",
+    "components",
+    "shadcn",
+    "ui",
+    "gis",
+    "maplibre",
+    "typescript"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
