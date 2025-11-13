@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import BasicMap from "@/components/map/BasicMap";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -17,7 +18,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React + shadcn/ui</h1>
+      <h1>Vite + React + shadcn/ui + MapLibre</h1>
       <div className="card">
         <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -26,9 +27,10 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <h2>Map Preview</h2>
+      <p className="read-the-docs">D-GIS Basic Map Component Test</p>
+      <BasicMap height="500px" />
     </>
   );
 }
