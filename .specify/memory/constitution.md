@@ -1,10 +1,10 @@
 <!--
 Sync Impact Report:
-Version change: 0.1.0 → 1.0.0
-Modified principles: Initial constitution creation
-Added sections: All sections (initial creation)
-Removed sections: None (initial creation)
-Templates requiring updates: ✅ All templates reviewed and aligned
+Version change: 1.0.0 → 1.1.0
+Modified principles: Added VI. Contextually Aware & Integrated (NON-NEGOTIABLE)
+Added sections: New principle on component contextual awareness and integration
+Removed sections: None
+Templates requiring updates: ✅ Plan template constitution check updated
 Follow-up TODOs: None
 -->
 
@@ -41,6 +41,12 @@ Dependency additions MUST be justified with clear benefit analysis. Prefer stand
 NO testing frameworks, unit tests, integration tests, or end-to-end tests are permitted unless explicitly requested by the project maintainer. Focus MUST be on shipping working code and real-world usage validation. Manual testing and user feedback are the primary quality assurance methods. This principle supersedes any other testing guidance.
 
 **Rationale**: Testing overhead can impede rapid prototyping and iteration. Real-world usage provides more valuable feedback than synthetic tests for UI components.
+
+### VI. Contextually Aware & Integrated (NON-NEGOTIABLE)
+
+Components MUST be contextually aware of their environment and intelligently integrate with other components. Layer controls MUST automatically detect and manage all map layers without manual configuration. Popup components MUST have access to complete layer attribute data. Table components MUST understand data schemas and present relevant fields appropriately. Components MUST communicate through shared context providers and expose their capabilities for discovery by other components. Integration MUST be seamless and require minimal developer intervention.
+
+**Rationale**: Contextual awareness eliminates boilerplate configuration, reduces developer cognitive load, and creates a cohesive ecosystem where components work together intelligently, leading to faster development and fewer integration errors.
 
 ## Technology Stack Requirements
 
@@ -100,4 +106,4 @@ Component proposals MUST demonstrate alignment with shadcn/ui patterns and inclu
 
 TanStack Router integration enables the component registry to provide type-safe navigation between component documentation, examples, and installation instructions, following the established shadcn/ui community patterns.
 
-**Version**: 1.0.0 | **Ratified**: 2025-11-13 | **Last Amended**: 2025-11-13
+**Version**: 1.1.0 | **Ratified**: 2025-11-13 | **Last Amended**: 2025-11-14

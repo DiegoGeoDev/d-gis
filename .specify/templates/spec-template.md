@@ -98,8 +98,9 @@ Define concrete, testable requirements for this component. D-GIS components MUST
 - **FR-003**: Component interface MUST be fully typed with TypeScript
 - **FR-004**: Component MUST be responsive and mobile-first optimized
 - **FR-005**: Component MUST support customization via Tailwind CSS classes
-- **FR-006**: [Feature-specific requirement]
+- **FR-006**: Component MUST integrate contextually with map and other components without manual configuration
 - **FR-007**: [Feature-specific requirement]
+- **FR-008**: [Feature-specific requirement]
 
 _Mark unclear requirements:_
 

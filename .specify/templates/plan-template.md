@@ -32,6 +32,7 @@ _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 - [ ] **Simple UX**: User experience is intuitive and mobile-first responsive
 - [ ] **Minimal Dependencies**: New dependencies justified with clear benefit analysis
 - [ ] **Zero Testing**: No testing frameworks or test files included (unless explicitly requested)
+- [ ] **Contextually Aware & Integrated**: Component integrates intelligently with other components and map context
 - [ ] **shadcn/ui Patterns**: Follows component architecture and installation patterns
 - [ ] **Performance**: Targets 60fps interactions and <50kb gzipped bundle size
 
