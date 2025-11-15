@@ -129,6 +129,7 @@
 ## Dependencies & Execution Strategy
 
 ### User Story Dependencies
+
 - **US1 (Core Experience)**: Independent - can start after foundational phase
 - **US2 (Search)**: Depends on US1 HeaderNavigation component
 - **US3 (Themes)**: Depends on US1 HeaderNavigation, uses foundational theme system
@@ -136,14 +137,17 @@
 ### Parallel Execution Opportunities
 
 **Within Each User Story:**
+
 - US1: T009, T010, T011 can run in parallel (different files)
 - US2: T017, T018 can run in parallel (different components)
 - US3: T024, T025 can run in parallel (different files)
 
 **Cross-Story Parallelization:**
+
 - US2 and US3 can start simultaneously after US1 T011 (HeaderNavigation) is complete
 
 ### MVP Strategy
+
 - **Phase 1-2**: Setup and foundation (required for all)
 - **Phase 3 (US1)**: Minimum viable landing page
 - **Phase 4-5**: Enhanced functionality (can be added incrementally)
@@ -152,6 +156,7 @@
 ## Manual Testing Checklist
 
 ### User Story 1 - Core Experience
+
 - [ ] Landing page loads within 3 seconds on 4G
 - [ ] Responsive design works on mobile (320px) to desktop (4K)
 - [ ] Hero section displays compelling title and clear CTAs
@@ -159,6 +164,7 @@
 - [ ] Navigation is accessible with keyboard and screen readers
 
 ### User Story 2 - Search
+
 - [ ] Search opens with ⌘K/Ctrl+K keyboard shortcut
 - [ ] Search returns results within 1 second of typing
 - [ ] Keyboard navigation works in search results
@@ -166,6 +172,7 @@
 - [ ] Screen readers announce search state changes
 
 ### User Story 3 - Themes
+
 - [ ] Theme toggle works and persists across sessions
 - [ ] System preference is respected on first visit
 - [ ] Mobile sidebar auto-collapses on small screens
@@ -173,6 +180,7 @@
 - [ ] Touch gestures work for sidebar on mobile
 
 ### Performance & Accessibility
+
 - [ ] Bundle size under 200kb gzipped
 - [ ] 60fps performance during all interactions
 - [ ] WCAG 2.1 AA compliance verified
