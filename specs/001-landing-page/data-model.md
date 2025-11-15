@@ -10,6 +10,7 @@
 **Purpose**: Main homepage component orchestrating all landing page functionality
 
 **Properties**:
+
 ```typescript
 interface LandingPageProps {
   className?: string;
@@ -22,13 +23,15 @@ interface LandingPageState {
 }
 ```
 
-**Relationships**: 
+**Relationships**:
+
 - Contains HeaderNavigation
-- Contains HeroSection  
+- Contains HeroSection
 - Contains MapShowcase
 - Contains Footer
 
 **Validation Rules**:
+
 - Must render within 3 seconds on 4G connections
 - Must maintain 60fps during interactions
 - Must pass WCAG 2.1 AA accessibility checks
@@ -38,6 +41,7 @@ interface LandingPageState {
 **Purpose**: Top navigation bar with responsive menu, search, and theme controls
 
 **Properties**:
+
 ```typescript
 interface HeaderNavigationProps {
   className?: string;
@@ -54,17 +58,19 @@ interface NavigationItem {
 
 interface HeaderNavigationState {
   sidebarOpen: boolean;
-  currentTheme: 'light' | 'dark' | 'system';
+  currentTheme: "light" | "dark" | "system";
 }
 ```
 
 **Relationships**:
+
 - Contains SearchInterface
 - Contains ThemeToggle
 - Contains SidebarNavigation (mobile)
 - Integrates with TanStack Router
 
 **Validation Rules**:
+
 - Navigation items must be keyboard accessible
 - Sidebar must auto-collapse on screens < 768px
 - Theme toggle must persist selection in localStorage
@@ -74,6 +80,7 @@ interface HeaderNavigationState {
 **Purpose**: Documentation search functionality using Command component
 
 **Properties**:
+
 ```typescript
 interface SearchInterfaceProps {
   open: boolean;
@@ -84,7 +91,7 @@ interface SearchItem {
   id: string;
   title: string;
   description?: string;
-  category: 'Components' | 'Documentation' | 'Examples' | 'API';
+  category: "Components" | "Documentation" | "Examples" | "API";
   href: string;
   keywords: string[];
 }
@@ -98,17 +105,20 @@ interface SearchState {
 ```
 
 **Relationships**:
+
 - Triggered by HeaderNavigation
 - Uses DocumentationIndex data
 - Integrates with keyboard shortcuts (⌘K/Ctrl+K)
 
 **State Transitions**:
+
 - Closed → Open (via keyboard shortcut or click)
 - Open → Closed (via Escape or outside click)
 - Empty → Results (via typing in search)
 - Results → Navigation (via Enter or click)
 
 **Validation Rules**:
+
 - Must return results within 1 second of typing
 - Must support keyboard navigation (arrows, enter, escape)
 - Must announce results to screen readers
@@ -118,26 +128,29 @@ interface SearchState {
 **Purpose**: Light/dark mode toggle with persistence and system preference fallback
 
 **Properties**:
+
 ```typescript
 interface ThemeContextProps {
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
-  actualTheme: 'light' | 'dark'; // resolved theme
+  theme: "light" | "dark" | "system";
+  setTheme: (theme: "light" | "dark" | "system") => void;
+  actualTheme: "light" | "dark"; // resolved theme
 }
 
 interface ThemeProviderProps {
   children: React.ReactNode;
-  defaultTheme?: 'light' | 'dark' | 'system';
+  defaultTheme?: "light" | "dark" | "system";
   storageKey?: string;
 }
 ```
 
 **State Transitions**:
+
 - System → Light/Dark (based on user preference or system change)
 - Manual → Stored (theme selection persisted to localStorage)
 - Page Load → Resolved (theme applied without flash)
 
 **Validation Rules**:
+
 - Must persist theme selection across browser sessions
 - Must respect system preference when theme is 'system'
 - Must provide smooth transitions between themes
@@ -148,6 +161,7 @@ interface ThemeProviderProps {
 **Purpose**: Interactive map example demonstrating D-GIS capabilities
 
 **Properties**:
+
 ```typescript
 interface MapShowcaseProps {
   className?: string;
@@ -175,17 +189,20 @@ interface MarkerData {
 ```
 
 **Relationships**:
+
 - Uses react-map-gl and MapLibre
 - Integrates with ThemeSystem for styling
 - Contains zoom and pan controls
 
 **State Transitions**:
+
 - Loading → Loaded (successful map initialization)
 - Loading → Error (network failure or map load failure)
 - Error → Retry (user clicks retry button)
 - Loaded → Interactive (user can zoom/pan/click markers)
 
 **Validation Rules**:
+
 - Must display graceful fallback on network errors
 - Must demonstrate markers, zoom, and pan interactions
 - Must be responsive across all device sizes
@@ -196,6 +213,7 @@ interface MarkerData {
 **Purpose**: Static search index for client-side documentation filtering
 
 **Properties**:
+
 ```typescript
 interface DocumentationIndex {
   version: string;
@@ -222,11 +240,13 @@ interface SearchItem {
 ```
 
 **Relationships**:
+
 - Consumed by SearchInterface
 - Generated at build time from documentation
 - Cached in browser for performance
 
 **Validation Rules**:
+
 - Must be generated at build time from current documentation
 - Must support fuzzy text matching
 - Must include priority-based result ranking
@@ -250,6 +270,7 @@ LandingPage
 ## Data Flow Patterns
 
 ### Theme Management Flow
+
 1. User clicks theme toggle
 2. ThemeSystem updates context and localStorage
 3. All components re-render with new theme
@@ -257,6 +278,7 @@ LandingPage
 5. Smooth transition animations applied
 
 ### Search Flow
+
 1. User presses ⌘K or clicks search
 2. SearchInterface opens with focus on input
 3. User types query → client-side filtering of DocumentationIndex
@@ -264,6 +286,7 @@ LandingPage
 5. User selects result → navigation via TanStack Router
 
 ### Error Handling Flow
+
 1. MapShowcase detects network error
 2. Component state transitions to error state
 3. Graceful fallback placeholder displayed with retry option
@@ -273,18 +296,21 @@ LandingPage
 ## Performance Considerations
 
 ### State Management
+
 - Use React Context for theme state (global)
 - Use local component state for UI interactions (search, sidebar)
 - Minimize re-renders through proper dependency arrays
 - Implement debouncing for search input (300ms)
 
 ### Memory Management
+
 - Clean up event listeners in useEffect cleanup
 - Memoize expensive computations (search results, theme calculations)
 - Use React.memo for static components
 - Implement proper cleanup for map resources
 
 ### Bundle Optimization
+
 - Code split heavy components (MapShowcase)
 - Tree-shake unused shadcn/ui components
 - Optimize documentation index size

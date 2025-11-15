@@ -72,7 +72,7 @@ export interface SearchItem {
   /** Optional description */
   description?: string;
   /** Category for grouping results */
-  category: 'Components' | 'Documentation' | 'Examples' | 'API';
+  category: "Components" | "Documentation" | "Examples" | "API";
   /** Target URL */
   href: string;
   /** Keywords for search matching */
@@ -95,18 +95,18 @@ export interface ThemeProviderProps {
   /** Child components */
   children: React.ReactNode;
   /** Default theme selection */
-  defaultTheme?: 'light' | 'dark' | 'system';
+  defaultTheme?: "light" | "dark" | "system";
   /** localStorage key for persistence */
   storageKey?: string;
 }
 
 export interface ThemeContextValue {
   /** Current theme setting */
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   /** Function to update theme */
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  setTheme: (theme: "light" | "dark" | "system") => void;
   /** Resolved theme (light or dark) */
-  actualTheme: 'light' | 'dark';
+  actualTheme: "light" | "dark";
 }
 
 export declare const ThemeProvider: React.FC<ThemeProviderProps>;
@@ -257,11 +257,14 @@ export interface DocumentationIndex {
   /** Search items */
   items: SearchItem[];
   /** Category metadata */
-  categories: Record<string, {
-    label: string;
-    count: number;
-    icon?: string;
-  }>;
+  categories: Record<
+    string,
+    {
+      label: string;
+      count: number;
+      icon?: string;
+    }
+  >;
 }
 ```
 
@@ -302,11 +305,11 @@ export interface MapConfig {
  */
 export interface ThemeChangeEvent {
   /** Previous theme */
-  previousTheme: 'light' | 'dark' | 'system';
+  previousTheme: "light" | "dark" | "system";
   /** New theme */
-  newTheme: 'light' | 'dark' | 'system';
+  newTheme: "light" | "dark" | "system";
   /** Resolved actual theme */
-  actualTheme: 'light' | 'dark';
+  actualTheme: "light" | "dark";
   /** Timestamp of change */
   timestamp: number;
 }
@@ -320,7 +323,7 @@ export interface ThemeChangeEvent {
  */
 export interface SearchEvent {
   /** Type of search event */
-  type: 'open' | 'close' | 'query' | 'select' | 'clear';
+  type: "open" | "close" | "query" | "select" | "clear";
   /** Search query (for query and select events) */
   query?: string;
   /** Selected item (for select events) */
@@ -338,7 +341,7 @@ export interface SearchEvent {
  */
 export interface MapEvent {
   /** Type of map event */
-  type: 'load' | 'error' | 'retry' | 'marker_click' | 'viewport_change';
+  type: "load" | "error" | "retry" | "marker_click" | "viewport_change";
   /** Current viewport (for viewport_change events) */
   viewport?: MapViewport;
   /** Clicked marker (for marker_click events) */
@@ -363,15 +366,15 @@ export interface MapEvent {
  */
 export interface AriaProps {
   /** ARIA label for screen readers */
-  'aria-label'?: string;
+  "aria-label"?: string;
   /** ARIA description reference */
-  'aria-describedby'?: string;
+  "aria-describedby"?: string;
   /** ARIA expanded state for collapsible elements */
-  'aria-expanded'?: boolean;
+  "aria-expanded"?: boolean;
   /** ARIA hidden for decorative elements */
-  'aria-hidden'?: boolean;
+  "aria-hidden"?: boolean;
   /** ARIA live region for dynamic content */
-  'aria-live'?: 'polite' | 'assertive' | 'off';
+  "aria-live"?: "polite" | "assertive" | "off";
   /** ARIA role for semantic meaning */
   role?: string;
 }
@@ -391,7 +394,10 @@ export interface KeyboardHandlers {
   /** Handle Tab navigation */
   onTab?: (event: React.KeyboardEvent) => void;
   /** Handle Arrow key navigation */
-  onArrowKey?: (event: React.KeyboardEvent, direction: 'up' | 'down' | 'left' | 'right') => void;
+  onArrowKey?: (
+    event: React.KeyboardEvent,
+    direction: "up" | "down" | "left" | "right"
+  ) => void;
 }
 ```
 
@@ -405,13 +411,13 @@ export interface KeyboardHandlers {
  */
 export interface BundleTargets {
   /** Landing page total bundle (gzipped) */
-  landingPage: '200kb';
+  landingPage: "200kb";
   /** Individual component max size (gzipped) */
-  maxComponentSize: '10kb';
+  maxComponentSize: "10kb";
   /** Initial load time target */
-  loadTime: '3s';
+  loadTime: "3s";
   /** Time to interactive target */
-  timeToInteractive: '5s';
+  timeToInteractive: "5s";
 }
 ```
 

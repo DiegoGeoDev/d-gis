@@ -17,7 +17,7 @@
 ```bash
 # Core navigation and interaction components
 npx shadcn@latest add command
-npx shadcn@latest add sidebar  
+npx shadcn@latest add sidebar
 npx shadcn@latest add button
 npx shadcn@latest add dropdown-menu
 
@@ -41,20 +41,23 @@ Create the theme provider following shadcn/ui Vite patterns:
 
 ```typescript
 // src/components/theme-provider.tsx
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light" | "system";
 
 type ThemeProviderProps = {
-  children: React.ReactNode
-  defaultTheme?: Theme
-  storageKey?: string
-}
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
+};
 
-const ThemeProviderContext = createContext<{
-  theme: Theme
-  setTheme: (theme: Theme) => void
-} | undefined>(undefined)
+const ThemeProviderContext = createContext<
+  | {
+      theme: Theme;
+      setTheme: (theme: Theme) => void;
+    }
+  | undefined
+>(undefined);
 
 export function ThemeProvider({
   children,
@@ -63,61 +66,63 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  )
+  );
 
   useEffect(() => {
-    const root = window.document.documentElement
-    root.classList.remove("light", "dark")
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches ? "dark" : "light"
-      root.classList.add(systemTheme)
-      return
+        .matches
+        ? "dark"
+        : "light";
+      root.classList.add(systemTheme);
+      return;
     }
 
-    root.classList.add(theme)
-  }, [theme])
+    root.classList.add(theme);
+  }, [theme]);
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+      localStorage.setItem(storageKey, theme);
+      setTheme(theme);
     },
-  }
+  };
 
   return (
     <ThemeProviderContext.Provider value={value}>
       {children}
     </ThemeProviderContext.Provider>
-  )
+  );
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
+  const context = useContext(ThemeProviderContext);
   if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider")
-  return context
-}
+    throw new Error("useTheme must be used within a ThemeProvider");
+  return context;
+};
 ```
 
 ### 4. Create Mode Toggle Component
 
 ```typescript
 // src/components/mode-toggle.tsx
-import { Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useTheme } from "./theme-provider"
+} from "@/components/ui/dropdown-menu";
+import { useTheme } from "./theme-provider";
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -140,7 +145,7 @@ export function ModeToggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 ```
 
@@ -148,19 +153,19 @@ export function ModeToggle() {
 
 ```typescript
 // src/main.tsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from '@/components/theme-provider'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { ThemeProvider } from "@/components/theme-provider";
+import App from "./App.tsx";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider defaultTheme="system" storageKey="d-gis-theme">
       <App />
     </ThemeProvider>
-  </StrictMode>,
-)
+  </StrictMode>
+);
 ```
 
 ## Core Component Structure
@@ -169,10 +174,10 @@ createRoot(document.getElementById('root')!).render(
 
 ```typescript
 // src/components/landing-page.tsx
-import { HeaderNavigation } from './header-navigation'
-import { HeroSection } from './hero-section'
-import { MapShowcase } from './map-showcase'
-import { Footer } from './footer'
+import { HeaderNavigation } from "./header-navigation";
+import { HeroSection } from "./hero-section";
+import { MapShowcase } from "./map-showcase";
+import { Footer } from "./footer";
 
 export function LandingPage() {
   return (
@@ -184,7 +189,7 @@ export function LandingPage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 ```
 
@@ -192,16 +197,16 @@ export function LandingPage() {
 
 ```typescript
 // src/components/header-navigation.tsx
-import { useState } from 'react'
-import { Menu, Search, Github } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { ModeToggle } from './mode-toggle'
-import { SearchInterface } from './search-interface'
-import { SidebarNavigation } from './sidebar-navigation'
+import { useState } from "react";
+import { Menu, Search, Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "./mode-toggle";
+import { SearchInterface } from "./search-interface";
+import { SidebarNavigation } from "./sidebar-navigation";
 
 export function HeaderNavigation() {
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
@@ -211,13 +216,22 @@ export function HeaderNavigation() {
           <div className="flex items-center gap-6">
             <h1 className="text-2xl font-bold">D-GIS</h1>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="/docs" className="text-sm font-medium hover:text-primary">
+              <a
+                href="/docs"
+                className="text-sm font-medium hover:text-primary"
+              >
                 Docs
               </a>
-              <a href="/components" className="text-sm font-medium hover:text-primary">
-                Components  
+              <a
+                href="/components"
+                className="text-sm font-medium hover:text-primary"
+              >
+                Components
               </a>
-              <a href="/blocks" className="text-sm font-medium hover:text-primary">
+              <a
+                href="/blocks"
+                className="text-sm font-medium hover:text-primary"
+              >
                 Blocks
               </a>
             </nav>
@@ -256,7 +270,7 @@ export function HeaderNavigation() {
       <SearchInterface open={searchOpen} onOpenChange={setSearchOpen} />
       <SidebarNavigation open={sidebarOpen} onOpenChange={setSidebarOpen} />
     </>
-  )
+  );
 }
 ```
 
@@ -264,7 +278,7 @@ export function HeaderNavigation() {
 
 ```typescript
 // src/components/search-interface.tsx
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -272,45 +286,70 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command'
+} from "@/components/ui/command";
 
 interface SearchItem {
-  id: string
-  title: string
-  category: string
-  href: string
+  id: string;
+  title: string;
+  category: string;
+  href: string;
 }
 
 interface SearchInterfaceProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function SearchInterface({ open, onOpenChange }: SearchInterfaceProps) {
   const [searchItems] = useState<SearchItem[]>([
-    { id: '1', title: 'Getting Started', category: 'Documentation', href: '/docs' },
-    { id: '2', title: 'Basic Map', category: 'Components', href: '/components/map' },
-    { id: '3', title: 'Interactive Map', category: 'Components', href: '/components/interactive-map' },
-    { id: '4', title: 'Markers', category: 'Components', href: '/components/markers' },
-    { id: '5', title: 'Layer Controls', category: 'Components', href: '/components/layer-controls' },
-  ])
+    {
+      id: "1",
+      title: "Getting Started",
+      category: "Documentation",
+      href: "/docs",
+    },
+    {
+      id: "2",
+      title: "Basic Map",
+      category: "Components",
+      href: "/components/map",
+    },
+    {
+      id: "3",
+      title: "Interactive Map",
+      category: "Components",
+      href: "/components/interactive-map",
+    },
+    {
+      id: "4",
+      title: "Markers",
+      category: "Components",
+      href: "/components/markers",
+    },
+    {
+      id: "5",
+      title: "Layer Controls",
+      category: "Components",
+      href: "/components/layer-controls",
+    },
+  ]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        onOpenChange(!open)
+        e.preventDefault();
+        onOpenChange(!open);
       }
-    }
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [open, onOpenChange])
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [open, onOpenChange]);
 
   const groupedItems = searchItems.reduce((acc, item) => {
-    if (!acc[item.category]) acc[item.category] = []
-    acc[item.category].push(item)
-    return acc
-  }, {} as Record<string, SearchItem[]>)
+    if (!acc[item.category]) acc[item.category] = [];
+    acc[item.category].push(item);
+    return acc;
+  }, {} as Record<string, SearchItem[]>);
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
@@ -324,8 +363,8 @@ export function SearchInterface({ open, onOpenChange }: SearchInterfaceProps) {
                 key={item.id}
                 onSelect={() => {
                   // Navigate to item.href
-                  window.location.href = item.href
-                  onOpenChange(false)
+                  window.location.href = item.href;
+                  onOpenChange(false);
                 }}
               >
                 {item.title}
@@ -335,7 +374,7 @@ export function SearchInterface({ open, onOpenChange }: SearchInterfaceProps) {
         ))}
       </CommandList>
     </CommandDialog>
-  )
+  );
 }
 ```
 
@@ -343,7 +382,7 @@ export function SearchInterface({ open, onOpenChange }: SearchInterfaceProps) {
 
 ```typescript
 // src/components/hero-section.tsx
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
@@ -355,8 +394,8 @@ export function HeroSection() {
           for modern web apps
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Build interactive maps with shadcn/ui design patterns. 
-          Copy-paste components, full TypeScript support, and accessible by default.
+          Build interactive maps with shadcn/ui design patterns. Copy-paste
+          components, full TypeScript support, and accessible by default.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild>
@@ -368,7 +407,7 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 ```
 
@@ -376,32 +415,32 @@ export function HeroSection() {
 
 ```typescript
 // src/components/map-showcase.tsx
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { AlertTriangle, RotateCcw } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { AlertTriangle, RotateCcw } from "lucide-react";
 
 export function MapShowcase() {
-  const [mapLoaded, setMapLoaded] = useState(false)
-  const [mapError, setMapError] = useState(false)
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState(false);
 
   const handleRetry = () => {
-    setMapError(false)
-    setMapLoaded(false)
+    setMapError(false);
+    setMapLoaded(false);
     // Simulate map loading
     setTimeout(() => {
       // Simulate occasional failures for demo
       if (Math.random() > 0.8) {
-        setMapError(true)
+        setMapError(true);
       } else {
-        setMapLoaded(true)
+        setMapLoaded(true);
       }
-    }, 1000)
-  }
+    }, 1000);
+  };
 
   useEffect(() => {
-    handleRetry()
-  }, [])
+    handleRetry();
+  }, []);
 
   if (mapError) {
     return (
@@ -418,7 +457,7 @@ export function MapShowcase() {
           </Button>
         </Card>
       </section>
-    )
+    );
   }
 
   return (
@@ -426,10 +465,11 @@ export function MapShowcase() {
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4">See it in action</h2>
         <p className="text-muted-foreground">
-          Interactive map showcase with markers, zoom controls, and pan interactions
+          Interactive map showcase with markers, zoom controls, and pan
+          interactions
         </p>
       </div>
-      
+
       {mapLoaded ? (
         <Card className="p-4">
           <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
@@ -449,25 +489,28 @@ export function MapShowcase() {
         </Card>
       )}
     </section>
-  )
+  );
 }
 ```
 
 ## Implementation Priorities
 
 ### Phase 1: Foundation (Day 1)
+
 1. ✅ Set up ThemeProvider and ModeToggle
 2. ✅ Create basic HeaderNavigation structure
 3. ✅ Implement HeroSection with call-to-action buttons
 4. ✅ Add Footer with attribution
 
 ### Phase 2: Interactive Features (Day 2)
+
 1. ✅ Implement SearchInterface with Command component
 2. ✅ Add SidebarNavigation for mobile
 3. ✅ Create MapShowcase with error handling
 4. ✅ Integrate keyboard shortcuts (⌘K for search)
 
 ### Phase 3: Integration & Polish (Day 3)
+
 1. ✅ Connect TanStack Router for navigation
 2. ✅ Implement documentation index generation
 3. ✅ Add proper TypeScript interfaces
@@ -495,6 +538,7 @@ npm run lint
 ## Testing Checklist
 
 ### Manual Testing Requirements
+
 - [ ] Landing page loads within 3 seconds on 4G
 - [ ] Theme toggle works and persists across sessions
 - [ ] Search opens with ⌘K/Ctrl+K keyboard shortcut
@@ -505,12 +549,14 @@ npm run lint
 - [ ] Screen reader accessibility verified
 
 ### Responsive Testing
+
 - [ ] Mobile (320px - 768px): Sidebar navigation
 - [ ] Tablet (768px - 1024px): Hybrid layout
 - [ ] Desktop (1024px+): Full navigation bar
 - [ ] High resolution (4K): Proper scaling
 
 ### Accessibility Testing
+
 - [ ] WAVE accessibility scan passes
 - [ ] Keyboard-only navigation works
 - [ ] Screen reader announcements correct
